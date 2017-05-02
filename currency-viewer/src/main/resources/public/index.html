@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>World Currencies</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/css/dataTables.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active nav_btn"><a href="#">Home</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">World Currencies</h3>
+    </div>
+    <div class="row marketing disabled">
+        <!--<div class="col-lg-6">
+            <form class="form-inline calculator">
+                <div class="form-group">
+                    <select class="form-control">
+                        <option>USD</option>
+                        <option>USD</option>
+                    </select>
+                    <input type="text" class="form-control"  placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"  placeholder="0.0">
+                    <select class="form-control">
+                        <option>USD</option>
+                        <option>USD</option>
+                    </select>
+                </div>
+            </form>
+        </div>-->
+
+    </div>
+    <div class="jumbotron">
+        <h3>Actual Currencies</h3>
+        <table id="curr_table" class="display table table-striped table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Base</th>
+                <th>Code</th>
+                <th>Rate</th>
+                <th>Update Time</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2016 A.Radionov</p>
+    </footer>
+</div>
+</body>
+<script type="text/javascript" charset="utf8" src="/js/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="/js/dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8">
+$(document).ready(function () {
+    var currArray;
+    $.getJSON("/api/currency", function(jsonData) {
+        currArray = jsonData;
+        $("#curr_table").DataTable({
+            data: jsonData,
+            dataSrc: "",
+            columns: [
+                { data: "base" },
+                { data: "code" },
+                { data: "rate" },
+                { data: "timestamp" }
+            ],
+            columnDefs: [{
+                "targets": 0,
+                "orderable": false
+            }],
+            order: [[ 1, "asc" ]]
+        });
+    });
+} );
+</script>
+</html>
