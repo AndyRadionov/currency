@@ -1,7 +1,7 @@
 # currency
 
 Current Currencies Collector service. And web service for converting amount of money.
-Written in Java.
+Written in Java. (Work in Progress :)
 
 ### Used Libraries:
 - Jersey-client
